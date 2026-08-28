@@ -1,0 +1,252 @@
+/* Simple LMS - front-end styles
+ * Scoped under .slms-* so themes stay untouched. Uses CSS custom properties
+ * you can override from your theme.
+ */
+:root {
+	--slms-accent: #2563eb;
+	--slms-accent-contrast: #ffffff;
+	--slms-border: #e2e8f0;
+	--slms-muted: #64748b;
+	--slms-bg-soft: #f8fafc;
+	--slms-radius: 10px;
+	--slms-success: #16a34a;
+}
+
+.slms-wrap {
+	max-width: 1080px;
+	margin-inline: auto;
+}
+
+/* ---------- Buttons ---------- */
+.slms-button {
+	display: inline-block;
+	padding: 0.6em 1.2em;
+	border: 1px solid var(--slms-border);
+	border-radius: var(--slms-radius);
+	background: #fff;
+	color: inherit;
+	font: inherit;
+	line-height: 1.2;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+}
+.slms-button:hover { background: var(--slms-bg-soft); }
+.slms-button[disabled] { opacity: 0.55; cursor: not-allowed; }
+.slms-button--primary {
+	background: var(--slms-accent);
+	border-color: var(--slms-accent);
+	color: var(--slms-accent-contrast);
+}
+.slms-button--primary:hover { filter: brightness(0.94); background: var(--slms-accent); }
+.slms-complete.is-done,
+.slms-enroll--done {
+	background: var(--slms-success);
+	border-color: var(--slms-success);
+	color: #fff;
+}
+
+/* ---------- Course grid ---------- */
+.slms-grid {
+	display: grid;
+	gap: 1.5rem;
+	grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+	margin: 1.5rem 0;
+}
+.slms-grid--cols-1 { grid-template-columns: 1fr; }
+.slms-grid--cols-2 { grid-template-columns: repeat(2, 1fr); }
+.slms-grid--cols-3 { grid-template-columns: repeat(3, 1fr); }
+.slms-grid--cols-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) {
+	.slms-grid[class*="slms-grid--cols-"] { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+	.slms-grid[class*="slms-grid--cols-"] { grid-template-columns: 1fr; }
+}
+
+.slms-card {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--slms-border);
+	border-radius: var(--slms-radius);
+	overflow: hidden;
+	background: #fff;
+}
+.slms-card__media img { display: block; width: 100%; height: 180px; object-fit: cover; }
+.slms-card__body { display: flex; flex-direction: column; gap: 0.6rem; padding: 1rem 1.1rem 1.2rem; }
+.slms-card__title { margin: 0; font-size: 1.15rem; line-height: 1.3; }
+.slms-card__title a { text-decoration: none; }
+.slms-card__excerpt { margin: 0; color: var(--slms-muted); font-size: 0.95rem; }
+.slms-card__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem 0.9rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	color: var(--slms-muted);
+	font-size: 0.85rem;
+}
+.slms-card__price { font-weight: 600; color: inherit; }
+.slms-card .slms-button { margin-top: auto; text-align: center; }
+
+/* ---------- Course / lesson layout ---------- */
+.slms-course__layout,
+.slms-lesson {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 320px;
+	gap: 2.5rem;
+	align-items: start;
+	margin-top: 1.5rem;
+}
+@media (max-width: 860px) {
+	.slms-course__layout,
+	.slms-lesson { grid-template-columns: 1fr; }
+}
+.slms-course__media img { width: 100%; border-radius: var(--slms-radius); }
+.slms-course__meta,
+.slms-lesson__breadcrumb { color: var(--slms-muted); }
+.slms-course__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1rem;
+	list-style: none;
+	margin: 0.5rem 0 0;
+	padding: 0;
+	font-size: 0.9rem;
+}
+.slms-course__sidebar,
+.slms-lesson__sidebar {
+	border: 1px solid var(--slms-border);
+	border-radius: var(--slms-radius);
+	padding: 1.2rem;
+	background: var(--slms-bg-soft);
+}
+.slms-course__enroll { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1.2rem; }
+
+/* ---------- Progress bar ---------- */
+.slms-progress { margin: 0.4rem 0 0.8rem; }
+.slms-progress__track {
+	position: relative;
+	height: 10px;
+	border-radius: 999px;
+	background: #e5e7eb;
+	overflow: hidden;
+}
+.slms-progress__fill {
+	display: block;
+	height: 100%;
+	width: 0;
+	background: var(--slms-accent);
+	transition: width 0.35s ease;
+}
+.slms-progress__label { margin: 0.35rem 0 0; font-size: 0.8rem; color: var(--slms-muted); }
+
+/* ---------- Curriculum list ---------- */
+.slms-lesson-list { list-style: none; margin: 0; padding: 0; counter-reset: none; }
+.slms-lesson-list__item {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	padding: 0.55rem 0;
+	border-bottom: 1px solid var(--slms-border);
+}
+.slms-lesson-list__item:last-child { border-bottom: 0; }
+.slms-lesson-list__status {
+	flex: 0 0 1.6rem;
+	height: 1.6rem;
+	display: grid;
+	place-items: center;
+	border-radius: 999px;
+	background: #e5e7eb;
+	font-size: 0.8rem;
+	color: var(--slms-muted);
+}
+.slms-lesson-list__item.is-done .slms-lesson-list__status {
+	background: var(--slms-success);
+	color: #fff;
+}
+.slms-lesson-list__item.is-current .slms-lesson-list__link { font-weight: 700; }
+.slms-lesson-list__item.is-locked .slms-lesson-list__link { color: var(--slms-muted); }
+.slms-lesson-list__link { text-decoration: none; }
+
+.slms-badge {
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	padding: 0.1rem 0.4rem;
+	border-radius: 5px;
+	background: #e5e7eb;
+	color: var(--slms-muted);
+}
+.slms-badge--preview { background: #dbeafe; color: #1d4ed8; }
+.slms-badge--done { background: var(--slms-success); color: #fff; }
+
+/* ---------- Lesson content / nav ---------- */
+.slms-lesson__video {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	margin-bottom: 1.5rem;
+}
+.slms-lesson__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.slms-lesson-actions { display: flex; align-items: center; gap: 0.8rem; margin: 1.5rem 0; }
+.slms-lesson-nav {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-top: 2rem;
+	border-top: 1px solid var(--slms-border);
+	padding-top: 1rem;
+}
+.slms-lesson-nav a { text-decoration: none; display: block; }
+.slms-lesson-nav__next { text-align: right; margin-left: auto; }
+.slms-lesson-nav__dir { display: block; font-size: 0.8rem; color: var(--slms-muted); }
+
+/* ---------- Locked lesson ---------- */
+.slms-locked {
+	border: 1px dashed var(--slms-border);
+	border-radius: var(--slms-radius);
+	padding: 1.5rem;
+	background: var(--slms-bg-soft);
+}
+.slms-locked__teaser { color: var(--slms-muted); }
+.slms-locked__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; }
+
+/* ---------- My courses ---------- */
+.slms-my-courses { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.slms-my-courses__item {
+	border: 1px solid var(--slms-border);
+	border-radius: var(--slms-radius);
+	padding: 1.1rem 1.2rem;
+}
+.slms-my-courses__head { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; }
+.slms-my-courses__title { margin: 0; font-size: 1.1rem; }
+.slms-my-courses__title a { text-decoration: none; }
+
+/* ---------- Misc ---------- */
+.slms-notice {
+	border: 1px solid var(--slms-border);
+	border-left: 4px solid var(--slms-accent);
+	border-radius: 6px;
+	padding: 0.8rem 1rem;
+	background: var(--slms-bg-soft);
+}
+.slms-empty { color: var(--slms-muted); font-style: italic; }
+.slms-pagination { margin-top: 1.5rem; }
+.slms-pagination .page-numbers {
+	display: inline-block;
+	padding: 0.35em 0.7em;
+	border: 1px solid var(--slms-border);
+	border-radius: 6px;
+	margin: 0 0.15rem;
+	text-decoration: none;
+}
+.slms-pagination .page-numbers.current { background: var(--slms-accent); color: #fff; border-color: var(--slms-accent); }
+
+.screen-reader-text {
+	position: absolute !important;
+	width: 1px; height: 1px;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	white-space: nowrap;
+}
