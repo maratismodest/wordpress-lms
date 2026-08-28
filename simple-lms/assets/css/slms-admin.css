@@ -1,0 +1,20 @@
+/* Simple LMS - admin styles */
+
+.slms-settings .form-table th { width: 220px; }
+
+.slms-curriculum-list {
+	margin: 0 0 1em 1.4em;
+	padding: 0;
+}
+.slms-curriculum-list li { margin: 0.2em 0; }
+
+label.slms-danger {
+	color: #b32d2e;
+	font-weight: 600;
+}
+
+.slms-settings code {
+	background: #f0f0f1;
+	padding: 2px 5px;
+	border-radius: 3px;
+}
